@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useGetMovieQuery,
   useGetRecommendationsQuery,
@@ -18,6 +18,7 @@ import { useState } from "react";
 
 const MovieInfo = () => {
   const id = useLocation().pathname.split("/")[2];
+  const navigate = useNavigate();
 
   const { data, isLoading, isSuccess, isError } = useGetMovieQuery(id);
   const { data: recommendations } = useGetRecommendationsQuery({
@@ -27,30 +28,30 @@ const MovieInfo = () => {
   const [open, setOpen] = useState(false);
 
   if (isLoading) {
-    return <h1>loading...</h1>;
+    return <h1 className="h-screen flex justify-center">loading...</h1>;
   }
 
   if (isError) {
-    return <h1>it is error...</h1>;
+    return <h1 className="h-screen flex justify-center">it is error...</h1>;
   }
 
   if (isSuccess) {
     return (
       <div className="">
-        <div className="flex px-2">
-          <div className=" ">
+        <div className="flex flex-col md:flex-row px-2 text-white opacity-75">
+          <div className="flex justify-center md:pl-2 ">
             <img
               src={`https://image.tmdb.org/t/p/original/${data?.poster_path}`}
               alt=""
               className={
                 data.poster_path
-                  ? "w-[30rem] shadow-2xl"
+                  ? "w-[30rem] shadow-2xl hover:scale-105 transition-all"
                   : "w-[20rem] shadow-2xl"
               }
             />
           </div>
-          <div className="text-center pl-10 w-full">
-            <h3 className="font-bold text-3xl">
+          <div className="flex flex-col justify-center md:pl-10 w-full ">
+            <h3 className="font-bold text-3xl text-center">
               {data.title} {data.release_date.split("-")[0]}
             </h3>
             <h3 className="pt-2">{data.tagline}</h3>
@@ -68,11 +69,13 @@ const MovieInfo = () => {
             </div>
             <div className="flex justify-between  pt-5 px-10 ">
               {data.genres.map((genre) => (
-                <div key={genre.id} className="flex items-center gap-2  ">
+                <div
+                  key={genre.id}
+                  className="flex items-center gap-2 flex-wrap  ">
                   <img
                     src={genreIcons[genre.name.toLowerCase()]}
                     alt=""
-                    className="w-8"
+                    className="w-8 invert"
                   />
                   <h3>{genre.name}</h3>
                 </div>
@@ -82,7 +85,7 @@ const MovieInfo = () => {
               <h2 className="font-bold text-2xl">Overview</h2>
               <p>{data.overview}</p>
               <h2 className="font-bold text-2xl">Top Cast</h2>
-              <div className=" min-w-min flex gap-2">
+              <div className=" min-w-min flex gap-2 flex-wrap">
                 {data.credits.cast
                   .map(
                     (character, i) =>
@@ -116,7 +119,7 @@ const MovieInfo = () => {
                     FAVORITE <Favorite />
                   </Button>
                   <Button>WATCHLIST +1</Button>
-                  <Button>
+                  <Button onClick={() => navigate(-1)}>
                     BACK <ArrowBack />
                   </Button>
                 </ButtonGroup>
@@ -125,7 +128,7 @@ const MovieInfo = () => {
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-center py-4">
+        <h1 className="text-3xl font-bold text-center py-4 text-white opacity-70">
           You might also like
         </h1>
 
@@ -150,7 +153,7 @@ const MovieInfo = () => {
                 title="Trailer"
                 src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
                 allow="autoplay"
-                className="w-[50%] h-[50%]"
+                className="lg:w-[50%] lg:h-[50%] md:w-[70%] md:h-[50%] sm:w-[80%] sm:h-[50%] w-[90%] h-[40%]"
               />
             )}
           </Modal>

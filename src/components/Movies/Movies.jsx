@@ -15,7 +15,6 @@ const Movies = () => {
   );
   const searchQuery = useSelector((state) => state.currentCategory.searchQuery);
 
-  console.log("golla");
   useEffect(() => {
     setPage(1);
   }, []);
@@ -27,19 +26,19 @@ const Movies = () => {
 
   if (data && !data.results.length) {
     return (
-      <h1 className="font-bold">
+      <h1 className="font-bold h-screen text-white opacity-75 ">
         No Movies that match that name.
         <br />
         Please search for something else
       </h1>
     );
   }
-  if (error) return "An error has occured.";
+  if (error) return <h1 className="h-screen">"An error has occured.";</h1>;
 
   const numberOfMovies = 19;
   if (isLoading) {
     return (
-      <h1>
+      <h1 className="h-screen">
         <CircularProgress />
       </h1>
     );
@@ -47,7 +46,7 @@ const Movies = () => {
 
   if (isSuccess) {
     return (
-      <div>
+      <div className="scroll">
         <FeaturedMovie movie={data.results[0]} />
         <MovieList movies={data} first limit={numberOfMovies} />
         <Pagination

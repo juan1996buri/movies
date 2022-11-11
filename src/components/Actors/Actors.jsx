@@ -15,12 +15,12 @@ const Actors = () => {
   const [page, setPage] = useState(1);
   const { data: movies } = useGetMoviesByActorQuery({ id, page });
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1 className="h-screen">Loading...</h1>;
   }
   if (isSuccess) {
     return (
       <div>
-        <div className="flex">
+        <div className="flex text-white">
           <div className="p-10">
             <img
               src={`https://image.tmdb.org/t/p/w780/${data.profile_path}`}
@@ -28,7 +28,7 @@ const Actors = () => {
               className="w-[30rem]"
             />
           </div>
-          <div className="w-full">
+          <div className="w-full opacity-75">
             <h1 className="text-3xl py-2">{data.name}</h1>
             <h3 className="text-2xl py-1">
               Born: {new Date(data.birthday).toDateString()}{" "}

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Movie = ({ movie }) => {
   return (
-    <NavLink to={`/movie/${movie.id}`}>
+    <NavLink to={`/movie/${movie.id}`} className={"flex flex-col text-center "}>
       <img
         src={
           movie.poster_path
@@ -14,8 +14,10 @@ const Movie = ({ movie }) => {
         alt=""
         className="h-80 object-cover hover:scale-105 transition-all rounded-lg  "
       />
-      <h1>{movie.title}</h1>
-      <Rating readOnly value={movie.vote_average / 2} />
+      <div className="text-center">
+        <h1 className="opacity-75 text-white">{movie.title}</h1>
+        <Rating readOnly value={movie.vote_average / 2} />
+      </div>
     </NavLink>
   );
 };

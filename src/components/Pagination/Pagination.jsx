@@ -21,7 +21,10 @@ const Pagination = ({ page, setPage, totalPage }) => {
         }>
         <h3 className="text-3xl pb-1">-</h3>
       </button>
-      <h1 className={"p-2 w-8 h-8 flex items-center justify-center  text-2xl"}>
+      <h1
+        className={
+          "p-2 w-8 h-8 flex items-center justify-center  text-2xl text-white opacity-75"
+        }>
         {page}
       </h1>
       <button

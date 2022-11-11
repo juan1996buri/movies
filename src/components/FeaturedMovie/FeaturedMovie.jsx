@@ -12,7 +12,7 @@ const FeaturedMovie = ({ movie }) => {
             : cinema
         }
         alt=""
-        className="relative overflow-hidden h-screen  pb-24 w-full px-2   hover:scale-105 transition-all rounded-lg "
+        className="relative overflow-hidden h-screen  pb-24 w-full px-2   hover:scale-105 transition-all rounded-lg object-cover"
       />
       <div className="w-96 absolute top-60 pl-7 text-white">
         <h1>{movie.title}</h1>
