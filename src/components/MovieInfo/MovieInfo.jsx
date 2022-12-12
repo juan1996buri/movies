@@ -110,9 +110,12 @@ const MovieInfo = () => {
                   <Button>
                     IMDB <MovieIcon />
                   </Button>
-                  <Button onClick={() => setOpen(true)} href="#">
-                    TRAILER <Theaters />
-                  </Button>
+
+                  {data.videos.results[0] && (
+                    <Button onClick={() => setOpen(true)} href="#">
+                      TRAILER <Theaters />
+                    </Button>
+                  )}
                 </ButtonGroup>
                 <ButtonGroup size="small" variant="outlined">
                   <Button>

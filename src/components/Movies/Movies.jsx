@@ -18,6 +18,7 @@ const Movies = () => {
   useEffect(() => {
     setPage(1);
   }, []);
+
   const { data, isSuccess, isLoading, error } = useGetMoviesQuery({
     page,
     searchQuery,
